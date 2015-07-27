@@ -36,6 +36,7 @@ socket.on('get_mb_group',function(x){
 
     }
     else{
+      var listcheck = false;
       var select = document.getElementById(x[2]+"-ul");
       var num = parseInt(x[3]);
       var countLi = $("#"+x[2]+"-ul").children().length;
@@ -50,9 +51,9 @@ socket.on('get_mb_group',function(x){
           var desc = document.createElement("li");
           desc.innerHTML = "<span class='glyphicon glyphicon-user icon-custom subgroup-icon' aria-hidden='true'></span>"+x[i];
           ulparent.appendChild(desc);
+          listcheck = true;
         }
       }
-
       else{
         // alert("equal");
       }
@@ -170,6 +171,7 @@ socket.on("req_add_group_name",function(x){
     var acc = document.getElementById("subgrouplist");
     var div1 = document.createElement("div");
     div1.className = "accordion-section";
+    div1.id = x[1]+"-section";
     
     var a1 = document.createElement("a");
     a1.className = ("accordion-section-title");
@@ -183,6 +185,35 @@ socket.on("req_add_group_name",function(x){
 
     var ul1 = document.createElement("ul");
     ul1.id = x[1]+"-ul";
+
+    //leave btn
+    // var li1 = document.createElement("li");
+    // var bt_leave = document.createElement("button");
+    // bt_leave.type = "button";
+    // bt_leave.className = "btn btn-danger btn-xs";
+    // bt_leave.innerHTML = "Leave Group";
+    // bt_leave.onclick = leaveThisGroup(x[1]);
+    
+    // li1.appendChild(bt_leave);
+    // ul1.appendChild(li1);
+
+    // var li1 = document.createElement("li");
+    // var leave_btn = document.createElement("a");
+    // leave_btn.src = "#";
+    // leave_btn.onclick = leaveThisGroup(x[1]);
+    // leave_btn.innerHTML = "Leave Group";
+
+    // li1.appendChild(leave_btn);
+    // ul1.appendChild(li1);
+    
+    // var li1 = document.createElement("li");
+    // var bt_leave = document.createElement("input");
+    // bt_leave.type = "button";
+    // bt_leave.style.cssText ="color:red";
+    // bt_leave.value = "Leave Group";
+    // bt_leave.onclick = leaveThisGroup(x[1]);
+    // li1.appendChild(bt_leave);
+    // ul1.appendChild(li1);
 
     div2.appendChild(ul1);
     div1.appendChild(a1);
@@ -220,6 +251,43 @@ var setGroupName = function(friendName){
     while(cMe[0]){
       cMe[0].parentNode.removeChild(cMe[0]);
     }
+    var contain_bt = document.getElementById("chat-title");
+    var bt_leave = document.createElement("button");
+    bt_leave.type = "button";
+    bt_leave.className = "btn btn-danger btn-xs leave_btn";
+    bt_leave.id = friendname+"-leave-btn";
+    bt_leave.innerHTML = "Leave Group";
+    bt_leave.onclick = leaveThisGroup(friendname);
+    
+    contain_bt.appendChild(bt_leave);
+  };
+}
+
+var leaveThisGroup = function(grName){
+  return function() {
+    var ret = confirm("Do you want to leave '"+grName+"' group?")
+    if(ret==true){
+      socket.emit('leavegroup',myname,grName);
+
+      var del_elem = document.getElementById(grName+"-section");
+      del_elem.parentNode.removeChild(del_elem);
+      $("#"+grName+"-leave-btn").remove();
+      delete mygroupname[grName];
+
+      document.getElementById("chat-title").innerHTML = "Chat room: messages";
+      document.getElementById("msgInput").placeholder = "Select your friend first.";
+
+      var cMsg = document.getElementsByClassName("msg");
+      var cMe = document.getElementsByClassName("me");
+      while(cMsg[0]){
+        cMsg[0].parentNode.removeChild(cMsg[0]);
+      }
+      while(cMe[0]){
+        cMe[0].parentNode.removeChild(cMe[0]);
+      }
+
+      // socket.emit('leavegroup',myname,grName);
+    }
   };
 }
 
@@ -229,8 +297,10 @@ socket.on("updategroups",function(x){
     return;
   }
   for(var i=3;i<x.length;i++){
+    var acc = document.getElementById("subgrouplist");
     var div1 = document.createElement("div");
     div1.className = "accordion-section";
+    div1.id = x[i]+"-section";
     
     var a1 = document.createElement("a");
     a1.href = "#"+x[i];
@@ -244,10 +314,39 @@ socket.on("updategroups",function(x){
     var ul1 = document.createElement("ul");
     ul1.id = x[i]+"-ul";
 
+    //leave btn
+    // var li1 = document.createElement("li");
+    // var bt_leave = document.createElement("button");
+    // bt_leave.type = "button";
+    // bt_leave.className = "btn btn-danger btn-xs";
+    // bt_leave.innerHTML = "Leave Group";
+    // bt_leave.onclick = leaveThisGroup(x[i]);
+    
+    // li1.appendChild(bt_leave);
+    // ul1.appendChild(li1);
+
+    // var li1 = document.createElement("li");
+    // var leave_btn = document.createElement("a");
+    // leave_btn.src = "#";
+    // leave_btn.onclick = leaveThisGroup(x[1]);
+    // leave_btn.innerHTML = "Leave Group";
+
+    // li1.appendChild(leave_btn);
+    // ul1.appendChild(li1);
+
+    // var li1 = document.createElement("li");
+    // var bt_leave = document.createElement("input");
+    // bt_leave.type = "button";
+    // bt_leave.style.cssText ="color:red";
+    // bt_leave.value = "Leave Group";
+    // bt_leave.onclick = leaveThisGroup(x[i]);
+    // li1.appendChild(bt_leave);
+    // ul1.appendChild(li1);
+
     div2.appendChild(ul1);
     div1.appendChild(a1);
     div1.appendChild(div2);
-    document.getElementsByClassName("accordion").appendChild(div1);
+    acc.appendChild(div1);
 
     openAccordion();
     mygroupname[x[i]]=x[i];

@@ -71,7 +71,7 @@ function openAccordion() {
   });
 }
 
-$(window).load(function() {
+$(document).ready(function() {
   // Input with enter key
   $('#loginName').keypress(function (e) {
    var key = e.which;

@@ -23,9 +23,6 @@ var usernames={};
 app.get('/', function(req, res){
   res.sendFile('index.html');
 });
-app.get('/test', function(req, res){
-  res.sendFile(path.join(__dirname+'/views/index2.html'));
-});
 
 //	listen on the connection event for incoming sockets
 io.on('connection', function(socket){
@@ -116,6 +113,9 @@ io.on('connection', function(socket){
         case "12":
           console.log("memberList--"+x[1]+":"+x[2]+":"+x[3]);
           io.emit('get_mb_group',x);
+          break;
+        case "13":
+          console.log(x[1]);
           break;
       }
     });
@@ -218,6 +218,13 @@ io.on('connection', function(socket){
 
       requester.send("6:"+groupname+":"+friendsname);
 
+    });
+
+    socket.on("leavegroup",function(username,groupname){
+      console.log("[leavegroup]-----------------------");
+      console.log('groupname: '+groupname+'\nusername: '+username);
+
+      requester.send("13:"+username+":"+groupname);
     });
 
     socket.on("disconnect",function(){

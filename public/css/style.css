@@ -221,6 +221,12 @@ hr{
 #grouplist ul{
   list-style-type: none;
 }
+#grouplist a{
+  text-decoration: none;
+}
+#grouplist li{
+  text-decoration: none;
+}
 
 /*---------------------*/
 
@@ -238,5 +244,8 @@ hr{
   width: 91%;
 }
 #chatfield button{
+  margin-left: 10px;
+}
+.leave_btn{
   margin-left: 10px;
 }
