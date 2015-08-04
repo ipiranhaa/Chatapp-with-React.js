@@ -1,17 +1,44 @@
+// Login container
+var LoginBox = React.createClass({
+  render: function() {
+    return (
+      <div className="login-contain">
+      <label>Login (or change your name): </label>
+      <input type="text" className="form-control" id="loginName" placeholder="Username" onClick={Keyload}/>
+      <button type="button" className="btn btn-sm btn-default" onClick={sendName}>Login</button>
+      <button type="button" className="btn btn-sm btn-default" id="btGroup" data-toggle="modal" onClick={createGroupModal}>Create group</button>
+      </div>
+      );
+  }
+});
+
+// search container
+var SearchBox = React.createClass({
+  render: function() {
+    return (
+      <div className="input-group search-contain">
+      <input type="text" className="form-control" id="searchBox" placeholder="Keyword" />
+      <span className="input-group-btn">
+      <button className="btn btn-default" type="button" onClick={search}><span className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+      </span>
+      </div>
+      );
+  }
+});
+
+
 // Header
-  var Head = React.createClass({
-    render: function() {
-      return (
-        <div id="newusr" className="form-inline">
-        <label>Login (or change your name): </label>
-        <input type="text" className="form-control" id="loginName" placeholder="Username" />
-        <button type="button" className="btn btn-sm btn-default" onClick={sendName}>Login</button>
-        <button type="button" className="btn btn-sm btn-default" id="btGroup" data-toggle="modal" onClick={createGroupModal}>Create group</button>
-        <p id="yourname"><span style={{"color" : "red"}}>You not login.</span></p>
-        </div>
-        );
-    }
-  });
+var Head = React.createClass({
+  render: function() {
+    return (
+      <div id="newusr" className="form-inline">
+      <LoginBox />
+      <SearchBox />
+      <p id="yourname"><span style={{"color" : "red"}}>You not login.</span></p>
+      </div>
+      );
+  }
+});
 
 // Chat body
 var Chatbody = React.createClass({
@@ -87,13 +114,33 @@ var Modal = React.createClass({
 });
 
 // Footer
-// <p id="frdname">Choose your friend first.</p> 
-var Footer = React.createClass({
+var Datamodel = React.createClass({
+  render: function() {
+    return (
+      <div className="text-center">
+      <a className="btn btn-info dm-btn" href="/datamodel.html" target="_blank">DataModel +</a>
+      </div>
+      );
+  }
+});
+
+var Chatfield = React.createClass({
   render: function() {
     return (
       <div id="chatfield" className="form-inline">
       <input type="text" className="form-control" id="msgInput" autofocus="autofocus" placeholder="Select your friend first." />
       <button type="button" className="btn btn-sm btn-default" onClick={sendMsg}>Send</button>       
+      </div>
+      );
+  }
+});
+
+var Footer = React.createClass({
+  render: function() {
+    return (
+      <div>
+      <Chatfield />
+      <Datamodel />
       </div>
       );
   }

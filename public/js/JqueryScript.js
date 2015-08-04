@@ -71,7 +71,8 @@ function openAccordion() {
   });
 }
 
-$(document).ready(function() {
+function Keyload(){
+  console.log("Enter key enable");
   // Input with enter key
   $('#loginName').keypress(function (e) {
    var key = e.which;
@@ -87,4 +88,4 @@ $(document).ready(function() {
     return false;  
   }
 });  
-}); 
+}

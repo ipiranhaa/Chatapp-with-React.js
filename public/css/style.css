@@ -147,12 +147,12 @@ p.hilight3{
 hr{
   border-color: #000 !important;
 }
-#newusr input{
+#newusr #loginName{
   width: 200px;
   margin-left: 10px;
   margin-right: 10px;
 }
-#newusr button{
+#newusr #loginName{
   margin-left: 10px;
 }
 .title-head{
@@ -241,7 +241,7 @@ hr{
 }
 
 #chatfield input{
-  width: 91%;
+  width: 94%;
 }
 #chatfield button{
   margin-left: 10px;
@@ -249,3 +249,25 @@ hr{
 .leave_btn{
   margin-left: 10px;
 }
+
+
+/* DataModel page */
+
+.dm-btn{
+  margin-top: 15px;
+}
+
+/* Search content */
+.search-contain, .login-contain{
+  display: inline;
+}
+.search-contain{
+  float: right;
+}
+.login-contain button{
+  margin-right: 10px;
+}
+#yourname{
+  display: inline-block;
+}
+

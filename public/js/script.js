@@ -525,3 +525,10 @@ function sendName(){
     socket.emit("adduser",myname);
   }
 }
+
+// ------------------------ DataModel ------------------------ //
+
+function search(){
+  var key = $("#searchBox").val();
+  console.log(key);
+}

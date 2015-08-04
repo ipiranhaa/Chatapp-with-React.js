@@ -23,6 +23,9 @@ var usernames={};
 app.get('/', function(req, res){
   res.sendFile('index.html');
 });
+app.get('/datamodel', function(req, res){
+  res.sendFile('datamodel.html');
+});
 
 //	listen on the connection event for incoming sockets
 io.on('connection', function(socket){
