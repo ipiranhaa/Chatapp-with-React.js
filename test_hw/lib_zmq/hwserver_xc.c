@@ -10,7 +10,7 @@
 #include "transport.h"
 #include <jansson.h>
 
-#define TRANSPORT_PATH "/Users/Earth/code/transportlayer"
+#define TRANSPORT_PATH "/Users/PLaTanate/Desktop/transportlayer"
 
 int getIdFromConfig(TPTransportCTX *context, char *configFile, char *id);
 
